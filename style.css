@@ -1,0 +1,119 @@
+/* CSS variables. */
+:root {
+  --standard-text-color-headline: rgb(209, 31, 114);
+  --standard-border-radius: 10px;
+  --standard-border-style: ridge;
+  --standard-border-color: rgb(209, 82, 203);
+  --standard-background-color-selector: rgb(119, 35, 105);
+  --standard-margin-selector: 5px;
+  --standard-font-color-selector: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(138, 153, 170);
+}
+
+/* wrapper is the container of all objects of the website. */
+#wrapper {
+  background-color: rgb(178, 162, 180);
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 30px;
+  border-radius: var(--standard-border-radius);
+  border-style: var(--standard-border-style);
+  border-color: var(--standard-border-color);
+}
+
+/* The head line of the website. */
+#ThemeTitle {
+  background-color: var(--standard-background-color-selector);
+  margin: 5px;
+  margin-bottom: 10px;
+  color: var(--standard-text-color-headline);
+  border-color: var(--standard-border-color);
+  border-radius: var(--standard-border-radius);
+  border-style: var(--standard-border-style);
+  padding: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* the container for the input elements for the year, month and button to month of today. */
+#Selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: var(--standard-background-color-selector);
+  border-radius: var(--standard-border-radius);
+  border-style: var(--standard-border-style);
+  border-color: var(--standard-border-color);
+  margin: var(--standard-margin-selector);
+}
+
+/* Id "month": the drop down list to choose the month. */
+#month {
+  color: var(--standard-font-color-selector);
+  font-weight: bold;
+  margin: var(--standard-margin-selector);
+}
+
+/* Id "year": field in which the year as number is entered. */
+#year {
+  color: var(--standard-text-color);
+  margin: var(--standard-margin-selector);
+}
+
+/* Id "showButton": Button to click to show the current month of today. */
+#showButton {
+  --font-size: 13px;
+  margin: var(--standard-margin-selector);
+  color: var(--standard-font-color-selector);
+  font-size: var(--font-size);
+  height: calc(var(--font-size) + 10px);
+}
+
+/* Id "year": field in which the year as number is entered. */
+#years {
+  color: var(--standard-font-color-selector);
+  margin: var(--standard-margin-selector);
+}
+
+/* id "daylist": the container of the day boxes  */
+#daylist {
+  display: grid;
+  margin: var(--standard-margin-selector);
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  grid-gap: var(--standard-margin-selector);
+}
+
+/* When the user types something else than a digit. */
+#unvalidYear {
+  margin: var(--standard-margin-selector);
+  border-radius: var(--standard-border-radius);
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+  background-color: red;
+}
+
+/* If the field of the year is empty. */
+.unvalidYearNoSign#unvalidYear {
+  background-color: rgb(116, 115, 160);
+}
+
+/* How a box for a day looks like. A Day box shows the number of the day in the month and which weekday it is. */
+.day {
+  background-color: rgb(100, 27, 88);
+  color: white;
+  padding-left: 5px;
+  padding-top: 5px;
+  height: 50px;
+  border-style: var(--standard-border-style);
+  border-radius: var(--standard-border-radius);
+  border-color: var(--standard-border-color);
+}
