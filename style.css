@@ -1,6 +1,6 @@
 /* CSS variables. */
 :root {
-  --standard-text-color-headline: rgb(209, 31, 114);
+  --standard-text-color-headline: #dbafe0;
   --standard-border-radius: 10px;
   --standard-border-style: ridge;
   --standard-border-color: rgb(209, 82, 203);
@@ -39,8 +39,11 @@ body {
   border-radius: var(--standard-border-radius);
   border-style: var(--standard-border-style);
   padding: 5px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
+  text-shadow: 2px 2px rgb(65, 33, 68);
+  font-style: oblique;
 }
 
 /* the container for the input elements for the year, month and button to month of today. */
@@ -86,7 +89,7 @@ body {
 #daylist {
   display: grid;
   margin: var(--standard-margin-selector);
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
   grid-gap: var(--standard-margin-selector);
 }
 
