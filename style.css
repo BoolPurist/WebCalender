@@ -18,8 +18,29 @@ body {
   background-color: rgb(138, 153, 170);
 }
 
+.navbar {
+  
+  display: flex;  
+}
+
+.navbar a {  
+  flex-basis: 100px;
+  line-height: 40px;  
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  color: var(--standard-font-color-selector);
+}
+
+.navbar a:hover {
+  background-color: var(--standard-background-color-selector);
+  border-radius: var(--standard-border-radius);
+}
+
+
+
 /* wrapper is the container of all objects of the website. */
-#wrapper {
+.wrapper {
   background-color: rgb(178, 162, 180);
   width: 80%;
   margin-left: 10%;
