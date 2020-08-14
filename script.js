@@ -1,4 +1,4 @@
-numbersOfDaysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const numbersOfDaysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 // Elements that change the date. Here they get the events attached.
 // Id "showButton": Button to click to show the current month of today.
 document
@@ -8,6 +8,9 @@ document
 document.getElementById("monthSelector").addEventListener("change", showMonth, false);
 // Id "year": field in which the year as number is entered.
 document.getElementById("yearInput").addEventListener("input", showMonth);
+
+// wrapper is the container of all objects of the website.
+const wrapper = document.getElementById("calender");
 
 // When the user loads the page. The month of the today date is displayed.
 setTodayDate();
@@ -20,50 +23,47 @@ function leapYear(year) {
 // Main routine for building the shown month.
 function showMonth() {
   // List of days is all the days as boxes that represent a month
-  let dayList = document.getElementById("daylist");
+  const dayList = document.getElementById("daylist");
 
   // Deleting all day boxes.
   while (dayList.firstChild) {
     dayList.removeChild(dayList.lastChild);
   }
 
-  // wrapper is the container of all objects of the website.
-  let wrapper = document.getElementById("calender");
+ 
   // Box for the error box that says that the user should only use digits.
-  let unvalidYear = document.getElementById("unvalidYear");
+  const unvalidYear = document.getElementById("unvalidYear");
 
   // Checking if an error message is there to be removed.
   if (unvalidYear !== null) {
     wrapper.removeChild(unvalidYear);
   }
 
-  // Get the current typed year as a whole number.
+  // Get the current entered year as a whole number.
   let currentYear = document.getElementById("yearInput");
-  currentYear = currentYear.value.trim();
+  currentYear = currentYear.value.trim();  
   
+  const messageAskforPositiveNumber = "Please enter a positive number for the year !"; 
 
   // Check if the field year is empty.
   if (currentYear === "") {
-    unvalidYear = document.createElement("div");
-    unvalidYear.id = "unvalidYear";
-    unvalidYear.classList.add("unvalidYearNoSign");
-    unvalidYear.innerText = "Please enter a number for the year !";
-    wrapper.appendChild(unvalidYear);    
+    appendErrorMessageToCalender(messageAskforPositiveNumber);
     return;
   }
-
   // Checks if the field year not only digits. The field should only have digits.
-  if (isNaN(currentYear)) {
-    unvalidYear = document.createElement("div");
-    unvalidYear.id = "unvalidYear";
-    unvalidYear.innerText = "a year must be made of digits !";
-    wrapper.appendChild(unvalidYear);
+  else if (isNaN(currentYear)) {
+    appendErrorMessageToCalender("A year must be made of digits !");
     return;
   }
-
-  // Convert string to integer.
+  
   currentYear = parseInt(currentYear);
 
+  // Checks if the input field for year has a negativ number
+  if (currentYear < 0) {
+    appendErrorMessageToCalender(messageAskforPositiveNumber);
+    return;
+  }
+  
   // Get the current month from the drop down list.
   let currentMonth = document.getElementById("monthSelector");
   currentMonth = currentMonth.value;
@@ -81,11 +81,11 @@ function createMonth(currentYear, currentMonth) {
   }
 
   // Get the first weekday of the month. From that day the counting starts. From monday to tuesday etc ... .
-  let fristWeekday = new Date(currentYear, currentMonth);
+  const fristWeekday = new Date(currentYear, currentMonth);
   let currentWeekday = fristWeekday.getDay();
 
   // id "daylist": the container of the day boxes.
-  let dayList = document.getElementById("daylist");
+  const dayList = document.getElementById("daylist");
 
   for (let i = 1; i <= numbersOfDaysPerMonth[currentMonth]; i++) {
     let currentDay = document.createElement("div");
@@ -136,4 +136,15 @@ function translateDayNumberToName(day) {
       // Something went wrong !! Should not happen.
       console.Error("Weekday could not be assigned !");
   }
+}
+
+// Appends an error message to the place where usually the days of a month 
+// are shown. The message tells the user how to enter a valid value in the 
+// input box for the year.
+function appendErrorMessageToCalender(errorMessage) {
+  unvalidYear = document.createElement("div");
+  unvalidYear.id = "unvalidYear";
+  unvalidYear.innerText = errorMessage;
+  wrapper.appendChild(unvalidYear);    
+  return;
 }

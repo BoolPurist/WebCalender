@@ -129,16 +129,12 @@ body {
 #unvalidYear {
   margin: var(--standard-margin-selector);
   border-radius: var(--standard-border-radius);
+  border-style: var(--border-style-buttons);
   color: white;
+  background-color: red;
   text-align: center;
   font-weight: bold;
-  font-size: 30px;
-  background-color: red;
-}
-
-/* If the field of the year is empty. */
-.unvalidYearNoSign#unvalidYear {
-  background-color: rgb(116, 115, 160);
+  font-size: 30px;  
 }
 
 /* How a box for a day looks like. A Day box shows the number of the day in the month and which weekday it is. */
