@@ -26,12 +26,12 @@ function showMonth() {
   const dayList = document.getElementById("daylist");
 
   // Deleting all day boxes.
-  while (dayList.firstChild) {
+  while (dayList.firstChild != null) {
     dayList.removeChild(dayList.lastChild);
   }
 
  
-  // Box for the error box that says that the user should only use digits.
+  // Removes the error message in case the user gave a not valid value before. 
   const unvalidYear = document.getElementById("unvalidYear");
 
   // Checking if an error message is there to be removed.
@@ -51,7 +51,7 @@ function showMonth() {
     return;
   }
   // Checks if the field year not only digits. The field should only have digits.
-  else if (isNaN(currentYear)) {
+  else if (isNaN(currentYear) === true) {
     appendErrorMessageToCalender("A year must be made of digits !");
     return;
   }
@@ -72,7 +72,7 @@ function showMonth() {
   createMonth(currentYear, currentMonth);
 }
 
-// Build the month made of day boxes.
+// Builds the month with its days as day boxes.
 function createMonth(currentYear, currentMonth) {
   if (leapYear(currentYear)) {
     numbersOfDaysPerMonth[1] = 29;
@@ -80,16 +80,18 @@ function createMonth(currentYear, currentMonth) {
     numbersOfDaysPerMonth[1] = 28;
   }
 
-  // Get the first weekday of the month. From that day the counting starts. From monday to tuesday etc ... .
+  // Get the first weekday of the month. From that day the counting starts. 
+  // From monday to tuesday etc ... .
   const fristWeekday = new Date(currentYear, currentMonth);
   let currentWeekday = fristWeekday.getDay();
 
-  // id "daylist": the container of the day boxes.
+  // the container of the day boxes.
   const dayList = document.getElementById("daylist");
-
+  // Start building the day boxes.
   for (let i = 1; i <= numbersOfDaysPerMonth[currentMonth]; i++) {
     let currentDay = document.createElement("div");
-    // Class "day": How a box for a day looks like. A Day box shows the number of the day in the month and which weekday it is.
+    // Class "day": How a box for a day looks like. 
+    // A Day box shows the number of the day in the month and which weekday it is.
     currentDay.classList.add("day");
     // Write the respective week day to the current day.
     currentDay.innerText = `${i}\n${translateDayNumberToName(currentWeekday)}`;
@@ -103,7 +105,7 @@ function createMonth(currentYear, currentMonth) {
 // For showing the month of the month of today.
 function setTodayDate() {
   // Getting the year and month of today.
-  let now = new Date();
+  const now = new Date();
   let nowMonth = now.getMonth();
   let nowYear = now.getFullYear();
 

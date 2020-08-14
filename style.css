@@ -70,7 +70,7 @@ body {
   font-style: oblique;
 }
 
-/* the container for the input elements for the year, month and button to month of today. */
+/* the container for the input elements for the year, month and button for the current month. */
 #Selector {  
   display: grid;  
   grid-template-columns: 1fr auto 20ch auto;
@@ -82,12 +82,6 @@ body {
   margin: var(--standard-margin-selector);
 }
 
-#markerYear {
-  font-size: var(--font-size);
-  font-weight: var(--standard-font-weight);
-  color: var(--day-year-font-color-selector);
-}
-
 /* Id "month": the drop down list to choose the month. */
 #monthSelector {
   color: var(--standard-font-color-selector);
@@ -95,6 +89,13 @@ body {
   margin: var(--standard-margin-selector);
   border-style: var(--border-style-buttons);
   border-color: var(--standard-border-color);  
+}
+
+/* Text lable before the input field for the year */
+#markerYear {
+  font-size: var(--font-size);
+  font-weight: var(--standard-font-weight);
+  color: var(--day-year-font-color-selector);
 }
 
 /* Id "year": field in which the year as number is entered. */
@@ -117,7 +118,9 @@ body {
   border-color: var(--standard-border-color);
 }
 
-/* id "daylist": the container of the day boxes  */
+/* End of the elements inside the selector element.*/
+
+/* The container of the day boxes  */
 #daylist {
   display: grid;
   margin: var(--standard-margin-selector);
@@ -125,7 +128,7 @@ body {
   grid-gap: var(--standard-margin-selector);
 }
 
-/* When the user types something else than a digit. */
+/* Styling of the error messages displayed instead of the days of a month */
 #unvalidYear {
   margin: var(--standard-margin-selector);
   border-radius: var(--standard-border-radius);
@@ -137,7 +140,8 @@ body {
   font-size: 30px;  
 }
 
-/* How a box for a day looks like. A Day box shows the number of the day in the month and which weekday it is. */
+/* How a box for a day looks like. A Day box shows the number of the day in the month and 
+   which weekday it is. */
 .day {
   background-color: var(--standard-background-color-selector); 
   color: var(--day-year-font-color-selector);
@@ -161,9 +165,8 @@ body {
   }
 
   #ThemeTitle {
-    font-size: 18px;
+  font-size: 18px;
   }
-
   
   #monthSelector {
     grid-area: monthSelector;    
@@ -182,6 +185,8 @@ body {
     grid-area: showButton;
   }
 
+  /* For better usability the dropdown menu for the months are placed below every other 
+  element of the selector */
 
   #Selector {
     grid-template-columns: auto 1fr 1fr;
