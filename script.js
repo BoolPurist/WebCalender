@@ -28,7 +28,7 @@ function showMonth() {
   }
 
   // wrapper is the container of all objects of the website.
-  let wrapper = document.getElementById("wrapper");
+  let wrapper = document.getElementById("calender");
   // Box for the error box that says that the user should only use digits.
   let unvalidYear = document.getElementById("unvalidYear");
 
@@ -39,15 +39,17 @@ function showMonth() {
 
   // Get the current typed year as a whole number.
   let currentYear = document.getElementById("years");
-  currentYear = currentYear.value;
+  currentYear = currentYear.value.trim();
+  
 
   // Check if the field year is empty.
   if (currentYear === "") {
     unvalidYear = document.createElement("div");
     unvalidYear.id = "unvalidYear";
     unvalidYear.classList.add("unvalidYearNoSign");
-    unvalidYear.innerText = "Es wird eine Zahl für das Jahr gebraucht.";
+    unvalidYear.innerText = "Please enter a number for the year !";
     wrapper.appendChild(unvalidYear);
+    console.log();
     return;
   }
 
@@ -55,7 +57,7 @@ function showMonth() {
   if (isNaN(currentYear)) {
     unvalidYear = document.createElement("div");
     unvalidYear.id = "unvalidYear";
-    unvalidYear.innerText = "Das Jahr darf nur aus Zahlen bestehen !";
+    unvalidYear.innerText = "a year must be made of digits !";
     wrapper.appendChild(unvalidYear);
     return;
   }
