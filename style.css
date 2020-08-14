@@ -24,8 +24,8 @@ body {
 }
 
 .navbar a {  
-  flex-basis: 100px;
-  line-height: 40px;  
+  flex-basis: 300px;
+  line-height: 30px;  
   text-decoration: none;
   text-align: center;
   font-weight: bold;
