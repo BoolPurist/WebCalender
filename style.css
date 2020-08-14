@@ -5,9 +5,11 @@
   --standard-border-style: ridge;
   --border-style-buttons: solid;
   --standard-border-color: rgb(209, 82, 203);
-  --standard-background-color-selector: rgb(119, 35, 105);
+  --standard-background-color-selector: rgb(88, 36, 80);
   --standard-margin-selector: 5px;
   --standard-font-color-selector: black;
+  --day-year-font-color-selector: white;
+  --standard-font-weight: bold;
 }
 
 * {
@@ -28,7 +30,7 @@ body {
   line-height: 30px;  
   text-decoration: none;
   text-align: center;
-  font-weight: bold;
+  font-weight: var(--standard-font-weight);
   color: var(--standard-font-color-selector);
 }
 
@@ -62,16 +64,17 @@ body {
   border-style: var(--standard-border-style);
   padding: 5px;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: var(--standard-font-weight);
   text-align: center;
   text-shadow: 2px 2px rgb(65, 33, 68);
   font-style: oblique;
 }
 
 /* the container for the input elements for the year, month and button to month of today. */
-#Selector {
-  display: grid;
-  grid-template-columns: 1fr 7ch auto;
+#Selector {  
+  display: grid;  
+  grid-template-columns: 1fr auto 20ch auto;
+  column-gap: 10px;
   background-color: var(--standard-background-color-selector);
   border-radius: var(--standard-border-radius);
   border-style: var(--standard-border-style);
@@ -79,19 +82,27 @@ body {
   margin: var(--standard-margin-selector);
 }
 
+#markerYear {
+  font-size: var(--font-size);
+  font-weight: var(--standard-font-weight);
+  color: var(--day-year-font-color-selector);
+}
+
 /* Id "month": the drop down list to choose the month. */
-#month {
+#monthSelector {
   color: var(--standard-font-color-selector);
   font-weight: bold;
   margin: var(--standard-margin-selector);
   border-style: var(--border-style-buttons);
-  border-color: var(--standard-border-color);
+  border-color: var(--standard-border-color);  
 }
 
 /* Id "year": field in which the year as number is entered. */
-#year {
-  color: var(--standard-text-color);
+#yearInput {
+  color: var(--standard-font-color-selector);
   margin: var(--standard-margin-selector);
+  border-style: var(--border-style-buttons);
+  border-color: var(--standard-border-color);  
 }
 
 /* Id "showButton": Button to click to show the current month of today. */
@@ -99,17 +110,11 @@ body {
   --font-size: 13px;
   margin: var(--standard-margin-selector);
   color: var(--standard-font-color-selector);
-  font-size: var(--font-size);
-  height: calc(var(--font-size) + 10px);
+  font-size: var(--font-size);  
+  height: calc(var(--font-size) + 25px);
   border-style: var(--border-style-buttons);
   border-radius: var(--standard-border-radius);
   border-color: var(--standard-border-color);
-}
-
-/* Id "year": field in which the year as number is entered. */
-#years {
-  color: var(--standard-font-color-selector);
-  margin: var(--standard-margin-selector);
 }
 
 /* id "daylist": the container of the day boxes  */
@@ -138,8 +143,8 @@ body {
 
 /* How a box for a day looks like. A Day box shows the number of the day in the month and which weekday it is. */
 .day {
-  background-color: rgb(100, 27, 88);
-  color: white;
+  background-color: var(--standard-background-color-selector); 
+  color: var(--day-year-font-color-selector);
   padding-left: 5px;
   padding-top: 5px;
   height: 50px;
@@ -149,7 +154,7 @@ body {
 }
 
 /* Handling for smartphones. */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
   #wrapper {
     width: 95%;
     min-width: 330px;
@@ -162,4 +167,32 @@ body {
   #ThemeTitle {
     font-size: 18px;
   }
+
+  
+  #monthSelector {
+    grid-area: monthSelector;    
+  }
+
+  #markerYear {
+    grid-area: markerYear;
+    margin-left: 5px;
+  }
+
+  #yearInput {
+    grid-area: yearInput;
+  }
+
+  #showButton {
+    grid-area: showButton;
+  }
+
+
+  #Selector {
+    grid-template-columns: auto 1fr 1fr;
+    grid-template-areas:  "markerYear yearInput showButton"
+                          "monthSelector monthSelector monthSelector" ;
+    grid-auto-flow: column;
+    column-gap: 2px;
+  }
+
 }

@@ -5,9 +5,9 @@ document
   .getElementById("showButton")
   .addEventListener("click", setTodayDate, false);
 // Id "month": the drop down list to choose the month.
-document.getElementById("month").addEventListener("change", showMonth, false);
+document.getElementById("monthSelector").addEventListener("change", showMonth, false);
 // Id "year": field in which the year as number is entered.
-document.getElementById("years").addEventListener("input", showMonth);
+document.getElementById("yearInput").addEventListener("input", showMonth);
 
 // When the user loads the page. The month of the today date is displayed.
 setTodayDate();
@@ -19,7 +19,7 @@ function leapYear(year) {
 
 // Main routine for building the shown month.
 function showMonth() {
-  // Daylist is all the days as boxes that represent a month
+  // List of days is all the days as boxes that represent a month
   let dayList = document.getElementById("daylist");
 
   // Deleting all day boxes.
@@ -38,7 +38,7 @@ function showMonth() {
   }
 
   // Get the current typed year as a whole number.
-  let currentYear = document.getElementById("years");
+  let currentYear = document.getElementById("yearInput");
   currentYear = currentYear.value.trim();
   
 
@@ -48,8 +48,7 @@ function showMonth() {
     unvalidYear.id = "unvalidYear";
     unvalidYear.classList.add("unvalidYearNoSign");
     unvalidYear.innerText = "Please enter a number for the year !";
-    wrapper.appendChild(unvalidYear);
-    console.log();
+    wrapper.appendChild(unvalidYear);    
     return;
   }
 
@@ -66,7 +65,7 @@ function showMonth() {
   currentYear = parseInt(currentYear);
 
   // Get the current month from the drop down list.
-  let currentMonth = document.getElementById("month");
+  let currentMonth = document.getElementById("monthSelector");
   currentMonth = currentMonth.value;
   currentMonth = parseInt(currentMonth);
 
@@ -109,8 +108,8 @@ function setTodayDate() {
   let nowYear = now.getFullYear();
 
   // Setting up the drop down list for month and input text field for the year.
-  document.getElementById("month").value = nowMonth;
-  document.getElementById("years").value = nowYear;
+  document.getElementById("monthSelector").value = nowMonth;
+  document.getElementById("yearInput").value = nowYear;
 
   showMonth();
 }
@@ -135,6 +134,6 @@ function translateDayNumberToName(day) {
 
     default:
       // Something went wrong !! Should not happen.
-      console.log("Weekday could not be assigned !");
+      console.Error("Weekday could not be assigned !");
   }
 }
