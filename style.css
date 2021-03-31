@@ -179,6 +179,15 @@ body {
   text-align: center;
 }
 
+#noScriptText {
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: orange;
+  margin-left: var(--standard-margin-selector);
+  margin-right: var(--standard-margin-selector);
+}
+
 /* Handling for smartphones. */
 @media screen and (max-width: 700px) {
   #wrapper {
