@@ -1,3 +1,12 @@
+function CalenderWeek() {
+  this.weekNumber = 0;
+  this.startDate = null;
+  this.endDate = null;  
+}
+
+CalenderWeek.prototype.setStartDate = function (date) { this.startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()); }
+CalenderWeek.prototype.setEndDate = function (date) { this.endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()); }
+
 const numbersOfDaysPerMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 // Elements that change the date. Here they get the events attached.
@@ -99,68 +108,83 @@ function createMonth(currentYear, currentMonth) {
     currentWeekday = (currentWeekday + 1) % 7;
   }
 
-  createCalenderWeeks(currentYear, currentMonth);
+  appendCWsTable(currentYear, currentMonth);
 }
 
 
 // returns a array of strings. Each string is line showing a calender week with the start date and end date
-function createCalenderWeeks(currentYear, currentMonth) {
+function appendCWsTable(currentYear, currentMonth) {
 
+
+  containerForCalenderWeeks.innerHTML = `  
+  <tr class="calenderWeekHeader">
+    <th>Calender Week</th>
+    <th>From</th>
+    <th>To</th>
+  <tr>
+  `;
+
+  calenderWeeks = createCWs(currentYear, currentMonth);
+
+  for (week of calenderWeeks) {
+    tr = document.createElement("tr");
+    tr.classList.add("calenderWeekRow");
+    tr.innerHTML = `
+    <td class="weekNumber">${week.weekNumber}</td>
+    <td>${week.startDate.getDate()}.${week.startDate.getMonth()}.${week.startDate.getFullYear()}</td>
+    <td>${week.endDate.getDate()}.${week.endDate.getMonth()}.${week.endDate.getFullYear()}</td>
+    `;
+    containerForCalenderWeeks.appendChild(tr);
+  }
+}
+
+
+
+function createCWs(currentYear, currentMonth) {
+  
   const calenderWeeks = [];
+  
   let currentIndexForWeek = -1;
-  let currentDateString = "";
+  let currentCalenderWeek = new CalenderWeek();
   let currentDate = new Date(currentYear, currentMonth, 1);
-  
-  const printToDate = () => ` => ${dateToString(currentDate)}`;
-  const printFromDate = () => ` ${dateToString(currentDate)}`;
-  const printCW = () => `${currentIndexForWeek}. CW`;
-  
   
   const currentDay = currentDate.getDay();
   
   currentIndexForWeek = getCW(currentDate);
-  console.log(getCW(currentDate));
-  currentDateString += printCW();
+  currentCalenderWeek.weekNumber = currentIndexForWeek;  
   currentIndexForWeek %= 53;
 
 
   // Going back to last monday. Can may be end up in the previous month.
   currentDate.setDate(currentDate.getDate() - (currentDay === 0 ? 6 : currentDay - 1));
 
-  currentDateString += printFromDate();
+  currentCalenderWeek.setStartDate(currentDate);
   
   // Go to the 1. monday of this month
   currentDate.setDate(currentDate.getDate() + 6);
 
-  currentDateString += printToDate();
-
-  calenderWeeks.push(currentDateString);
+  currentCalenderWeek.setEndDate(currentDate);
+  calenderWeeks.push(currentCalenderWeek);
   
   const selectedMonth = currentDate.getMonth();
   // Performs first move to next day before loop to do append the next move to the next day at the end of the loop
 
   currentDate.setDate(currentDate.getDate() + 1);
 
+
   do {
-    currentDateString = "";
+    currentCalenderWeek = new CalenderWeek();
     currentIndexForWeek++;
-    currentDateString += printCW();
-    currentDateString += printFromDate();
+    currentCalenderWeek.weekNumber = currentIndexForWeek;
+    currentCalenderWeek.setStartDate(currentDate);
     currentDate.setDate(currentDate.getDate() + 6);
-    currentDateString += printToDate();
-    calenderWeeks.push(currentDateString);
+    currentCalenderWeek.setEndDate(currentDate);
+    calenderWeeks.push(currentCalenderWeek);
     // Append at the end will prevent doing loops for a first week of the next week in some cases.
     currentDate.setDate(currentDate.getDate() + 1);
-  } while (selectedMonth === currentDate.getMonth())
+  } while (selectedMonth === currentDate.getMonth());
 
-  containerForCalenderWeeks.innerHTML = "";
-
-  for (week of calenderWeeks) {
-    const p = document.createElement("p");
-    p.classList.add("calenderWeek");
-    p.innerText = week;
-    containerForCalenderWeeks.appendChild(p);
-  }
+  return calenderWeeks;
 }
 
 // For showing the month of the month of today.

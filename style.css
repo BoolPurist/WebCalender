@@ -10,6 +10,8 @@
   --standard-font-color-selector: black;
   --day-year-font-color-selector: white;
   --standard-font-weight: bold;
+  --week-number-table-left-right-margin: 20px;
+  --week-number-table-cell-padding: 5px;
 }
 
 * {
@@ -128,22 +130,6 @@ body {
   grid-gap: var(--standard-margin-selector);
 }
 
-#calenderWeeks {
-  margin: var(--standard-margin-selector);
-}
-
-.calenderWeek {  
-  background-color: var(--standard-background-color-selector); 
-  color: var(--day-year-font-color-selector);
-  padding-left: 5px;
-  padding-top: 10px;
-  height: 50px;
-  border-style: var(--standard-border-style);
-  border-radius: var(--standard-border-radius);
-  border-color: var(--standard-border-color);
-  vertical-align: text-bottom;
-}
-
 /* Styling of the error messages displayed instead of the days of a month */
 #unvalidYear {
   margin: var(--standard-margin-selector);
@@ -167,6 +153,30 @@ body {
   border-style: var(--standard-border-style);
   border-radius: var(--standard-border-radius);
   border-color: var(--standard-border-color);
+}
+
+#calenderWeeks {
+  --left-right-margin: auto;
+
+  margin-top : var(--week-number-table-left-right-margin);
+  margin-bottom: var(--week-number-table-left-right-margin);
+  margin-left: var(--left-right-margin);
+  margin-right: var(--left-right-margin);
+}
+
+.calenderWeekHeader, .calenderWeekRow {
+  background-color: var(--standard-background-color-selector); 
+  color: var(--day-year-font-color-selector);
+}
+
+.calenderWeekHeader th, .calenderWeekRow td {
+  border-style: var(--standard-border-style);
+  padding: var(--week-number-table-cell-padding);
+  border-color: var(--standard-border-color);
+}
+
+.weekNumber {
+  text-align: center;
 }
 
 /* Handling for smartphones. */
