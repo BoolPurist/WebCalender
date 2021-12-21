@@ -127,18 +127,25 @@ function appendCWsTable(currentYear, currentMonth) {
   calenderWeeks = createCWs(currentYear, currentMonth);
 
   for (week of calenderWeeks) {
-    tr = document.createElement("tr");
+    let startMonth = addLeadingZeroForOneDigit(week.startDate.getMonth() + 1);    
+    let endMonth = addLeadingZeroForOneDigit(week.endDate.getMonth() + 1);
+    let startDay = addLeadingZeroForOneDigit(week.startDate.getDate());
+    let endDay = addLeadingZeroForOneDigit(week.endDate.getDate());
+    tr = document.createElement("tr");    
     tr.classList.add("calenderWeekRow");
     tr.innerHTML = `
     <td class="weekNumber">${week.weekNumber}</td>
-    <td>${week.startDate.getDate()}.${week.startDate.getMonth()}.${week.startDate.getFullYear()}</td>
-    <td>${week.endDate.getDate()}.${week.endDate.getMonth()}.${week.endDate.getFullYear()}</td>
+    <td>${startDay}.${startMonth}.${week.startDate.getFullYear()}</td>
+    <td>${endDay}.${endMonth}.${week.endDate.getFullYear()}</td>
     `;
     containerForCalenderWeeks.appendChild(tr);
   }
 }
 
 
+function addLeadingZeroForOneDigit(digit) {
+  return digit < 10 ? `0${digit}` : digit;
+}
 
 function createCWs(currentYear, currentMonth) {
   
