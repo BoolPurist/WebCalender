@@ -1,54 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calender</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="wrapper navbar">      
-      <a href="OtherHtml/GDPR.html" target="_blank">Data Privacy</a>       
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrapper navbar">
+    <a href="OtherHtml/GDPR.html" target="_blank">Data Privacy</a>
+    <select id="themeSelector">
+      <option value="default">Default Theme</option>
+      <option value="dark">Dark Theme</option>
+      <option value="light">Light Theme</option>
+    </select>
+  </div>
 
-    <div class="wrapper" id="calender">
-      <h1 id="ThemeTitle">Calender to show a month with its days.</h1>
-      <noscript>
-        <p id="noScriptText">Javascript needs to be activated</p>
-      </noscript>
-      <!-- Elements for adjusting the date of the month to be shown -->
-      <div id="Selector">
-        <select id="monthSelector">
-          <option value="0">Januar</option>
-          <option value="1">Februar</option>
-          <option value="2">March</option>
-          <option value="3">April</option>
-          <option value="4">May</option>
-          <option value="5">June</option>
-          <option value="6">July</option>
-          <option value="7">August</option>
-          <option value="8">September</option>
-          <option value="9">October</option>
-          <option value="10">November</option>
-          <option value="11">Dezember</option>
-        </select>
-        <p id="markerYear">Year :</p>
-        <input
-          id="yearInput"
-          type="text"
-          placeholder="Enter a year"
-          value="no year"
-          maxlength="4"
-        />
-        <button id="showButton" type="button" value="null">
-          Show current Month
-        </button>
-      </div>
-      <div id="dayList"></div>
-      <table id="calenderWeeks">
-
-      </table>
+  <div class="wrapper" id="calendar">
+    <h1 id="themeTitle">Calendar to show a month with its days.</h1>
+    <noscript>
+      <p id="noScriptText">JavaScript needs to be activated</p>
+    </noscript>
+    <!-- Elements for adjusting the date of the month to be shown -->
+    <div id="selector">
+      <select id="monthSelector">
+        <option value="0">January</option>
+        <option value="1">February</option>
+        <option value="2">March</option>
+        <option value="3">April</option>
+        <option value="4">May</option>
+        <option value="5">June</option>
+        <option value="6">July</option>
+        <option value="7">August</option>
+        <option value="8">September</option>
+        <option value="9">October</option>
+        <option value="10">November</option>
+        <option value="11">December</option>
+      </select>
+      <p id="markerYear">Year :</p>
+      <input
+        id="yearInput"
+        type="text"
+        placeholder="Enter a year"
+        value="no year"
+        maxlength="4"
+      />
+      <button id="showButton" type="button" value="null">
+        Show current Month
+      </button>
     </div>
-  </body>
-  <script src="script.js"></script>
+    <div id="dayList"></div>
+    <table id="calendarWeeks">
+
+    </table>
+  </div>
+</body>
+<script src="script.js"></script>
+<script>
+  // Add event listener to the theme selector
+  const themeSelector = document.getElementById('themeSelector');
+  themeSelector.addEventListener('change', function() {
+    const selectedTheme = themeSelector.value;
+    const calendar = document.getElementById('calendar');
+    calendar.className = `wrapper ${selectedTheme}`;
+  });
+</script>
 </html>
+
